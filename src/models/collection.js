@@ -14,7 +14,7 @@ class DataCollection {
   }
 
   create(record) {
-    console.log('===Data Collection===');
+    console.log(record);
     return this.model.create(record);
   }
 
