@@ -8,7 +8,6 @@ const eventModel = (sequelize, DataTypes) => sequelize.define('Events', {
   time: { type: DataTypes.STRING },
   packingList: { type: DataTypes.STRING },
   userId: { type: DataTypes.STRING },
-
 });
 
 
