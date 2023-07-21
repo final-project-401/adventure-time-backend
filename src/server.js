@@ -3,6 +3,9 @@ const cors = require('cors');
 const listRoutes = require('./routes/packingList');
 const plannerRoutes = require('./routes/planner');
 const userRoutes = require('./routes/users');
+const { getWeather } = require('./modules/weather');
+const { getReviews } = require('./modules/yelp');
+// const { getGrouponDeals } = require('./modules/groupon');
 const app = express();
 
 app.use(cors());
@@ -11,6 +14,18 @@ app.use(express.json());
 app.use(userRoutes);
 app.use(listRoutes);
 app.use(plannerRoutes);
+
+app.get('/forecast', (req, res) => {
+  getWeather(req, res).catch(error => console.error(error));
+});
+
+app.get('/food', (req, res) => {
+  getReviews(req, res).catch(error => console.error(error));
+});
+
+// app.get('/deals', (req, res) => {
+//   getGrouponDeals(req, res).catch(error => console.error(error));
+// });
 
 module.exports = {
   server: app,
