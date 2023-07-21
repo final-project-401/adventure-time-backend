@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-
+require('dotenv').config();
 const userModel = require('./user');
 const eventModel = require('./events');
 const Collection = require('./collection');
@@ -12,6 +12,11 @@ const sequelize = new Sequelize(DB_URL);
 const user = userModel(sequelize, DataTypes);
 const event = eventModel(sequelize, DataTypes);
 const item = itemModel(sequelize, DataTypes);
+
+user.hasMany(event);
+event.belongsTo(user);
+event.hasMany(item);
+item.belongsTo(event);
 
 module.exports = {
   db: sequelize,
