@@ -6,6 +6,7 @@ let cache = {};
 
 class Forecast {
   constructor(cityObj) {
+    this.city = cityObj.city_name;
     this.date = cityObj.datetime;
     this.description = cityObj.weather.description;
     this.low_temp = cityObj.low_temp;
@@ -36,7 +37,13 @@ async function getWeather(req, res, next) {
       let foundCity = await axios.get(url);
 
       console.log('postalCode', postalCode, 'searchQuery', searchQuery);
-      let dataToSend = foundCity.data.data.map(newWeather => new Forecast(newWeather));
+      // let dataToSend = foundCity.data.data.map(newWeather => new Forecast(newWeather));
+      let dataToSend = [{
+        city: foundCity.data.city_name,
+        state: foundCity.data.state_code,
+        timezone: foundCity.data.timezone,
+        data: foundCity.data.data.map(newWeather => new Forecast(newWeather)),
+      }];
 
       cache[key] = {
         data: dataToSend,

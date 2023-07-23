@@ -29,6 +29,7 @@ async function handleGetOne(req, res) {
 
 async function handleCreate(req, res) {
   console.log('===Route Handler===');
+  console.log('req>>>', req);
   let obj = req.body;
   let newUser = await User.create(obj);
   res.status(201).json(newUser);
