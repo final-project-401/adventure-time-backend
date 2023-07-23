@@ -11,8 +11,7 @@ router.put('/planner/:id', handleUpdate);
 
 async function handleGetAll(req, res) {
   try {
-    console.log('user get works ====');
-    let allUsers = await Event.get(); // Corrected method name to retrieve all users
+    let allUsers = await Event.get();
     res.status(200).json(allUsers);
   } catch (error) {
     console.error('Error fetching all users:', error);
@@ -29,6 +28,7 @@ async function handleGetOne(req, res) {
 async function handleCreate(req, res) {
   let obj = req.body;
   let newAdventure = await Event.create(obj);
+  console.log(newAdventure);
   res.status(201).json(newAdventure);
 }
 
