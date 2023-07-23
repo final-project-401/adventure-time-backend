@@ -5,6 +5,7 @@ const plannerRoutes = require('./routes/planner');
 const userRoutes = require('./routes/users');
 const { getWeather } = require('./modules/weather');
 const { getReviews } = require('./modules/yelp');
+const { User } = require('./models');
 const { sendEmail } = require('./modules/email');
 // const { getGrouponDeals } = require('./modules/groupon');
 const app = express();

@@ -6,20 +6,28 @@ let cache = {};
 
 class Forecast {
   constructor(cityObj) {
+    this.city = cityObj.city_name;
     this.date = cityObj.datetime;
     this.description = cityObj.weather.description;
     this.low_temp = cityObj.low_temp;
     this.high_temp = cityObj.high_temp;
-    this.precip = cityObj.precip;
+    this.pop = cityObj.pop;
+    this.uvIndex = cityObj.uv;
+    this.windSpd = cityObj.wind_spd;
+    this.windDir = cityObj.wind_cdir;
+    this.humidity = cityObj.rh;
+    this.pressure = cityObj.pres;
     this.snow = cityObj.snow;
+    this.weatherCode = cityObj.weather.code;
     this.icon = cityObj.weather.icon;
     this.iconPath = `https://cdn.weatherbit.io/static/img/icons/${cityObj.weather.icon}.png`;
-    this.feelsLike = cityObj.app_temp;
     this.temp = cityObj.temp;
   }
 }
 
-async function getWeather(req, res, next) {
+
+
+async function getWeather(req, res, next, postalCode) {
   try {
     let postalCode = req.query.postal_code;
     let searchQuery = req.query.searchQuery;
@@ -31,12 +39,18 @@ async function getWeather(req, res, next) {
 
     } else {
       console.log('Cache was missed!');
-      let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&units=I&postal_code=37042`;
+      let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&units=I&postal_code=${postalCode}`;
 
       let foundCity = await axios.get(url);
 
       console.log('postalCode', postalCode, 'searchQuery', searchQuery);
-      let dataToSend = foundCity.data.data.map(newWeather => new Forecast(newWeather));
+      // let dataToSend = foundCity.data.data.map(newWeather => new Forecast(newWeather));
+      let dataToSend = [{
+        city: foundCity.data.city_name,
+        state: foundCity.data.state_code,
+        timezone: foundCity.data.timezone,
+        data: foundCity.data.data.map(newWeather => new Forecast(newWeather)),
+      }];
 
       cache[key] = {
         data: dataToSend,
