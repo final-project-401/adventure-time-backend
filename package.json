@@ -24,7 +24,7 @@
   "scripts": {
     "db:config": "sequelize init:config",
     "db:create": "sequelize db:create",
-    "test": "NODE_ENV=test jest  --verbose --coverage --detectOpenHandles"
+    "test": "jest  --verbose --coverage --detectOpenHandles"
   },
   "author": "",
   "license": "ISC"
