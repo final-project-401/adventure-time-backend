@@ -5,6 +5,7 @@ const { User } = require('../../models/index');
 const router = express.Router();
 const axios = require('axios').default;
 
+
 // Auth0 credentials
 const auth0ClientId = 'NQ33EjV3cbB6iTGNoGFNEjbmymEMmXQA';
 const auth0ClientSecret = 'L0PH8PKt6S9b5uTkIM8TfruZGDVhDLP6BJ1IQl_lNGUOwCHrgN8NPpGqJKxgH-bG';
@@ -66,6 +67,20 @@ router.post('/api/user', async (req, res) => {
 
       // After creating the user, you can assign the role similarly as above.
       // ...
+
+
+router.post('/api/user', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const existingUser = await User.get(email);
+
+    if (existingUser) {
+
+      res.json({ message: 'User signed in successfully' });
+    } else {
+
+      await User.create({ email });
 
       res.json({ message: 'User added successfully' });
     }
