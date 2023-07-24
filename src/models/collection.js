@@ -4,9 +4,9 @@ class DataCollection {
     this.model = model;
   }
 
-  get(id) {
-    if (id) {
-      return this.model.findOne({ where: { id } });
+  get(email) {
+    if (email) {
+      return this.model.findOne({ where: { email } });
     }
     else {
       return this.model.findAll({});
