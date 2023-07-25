@@ -8,6 +8,7 @@ router.get('/planner', handleGetAll);
 router.get('/planner/:id', handleGetOne);
 router.post('/planner', handleCreate);
 router.put('/planner/:id', handleUpdate);
+router.delete('/planner/:id', handleDelete);
 
 async function handleGetAll(req, res) {
   try {
@@ -36,6 +37,14 @@ async function handleUpdate(req, res) {
   const id = req.params.id;
   const obj = req.body;
   let updatedAdventure = await Event.update(id, obj);
+  res.status(200).json(updatedAdventure);
+}
+
+async function handleDelete(req, res) {
+  const id = req.params.id;
+  const obj = req.body;
+  await Event.delete(id, obj);
+  let updatedAdventure = await Event.get();
   res.status(200).json(updatedAdventure);
 }
 
