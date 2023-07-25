@@ -4,7 +4,7 @@ const listRoutes = require('./routes/packingList');
 const plannerRoutes = require('./routes/planner');
 const userRoutes = require('./routes/users');
 const { getWeather } = require('./modules/weather');
-const { getReviews } = require('./modules/yelp');
+const { getReviews, getActivities, getLodging } = require('./modules/yelp');
 const { User } = require('./models');
 const { sendEmail } = require('./modules/email');
 // const { getGrouponDeals } = require('./modules/groupon');
@@ -29,6 +29,12 @@ app.get('/forecast', (req, res) => {
 
 app.get('/food', (req, res) => {
   getReviews(req, res).catch(error => console.error(error));
+});
+app.get('/rest', (req, res) => {
+  getLodging(req, res).catch(error => console.error(error));
+});
+app.get('/play', (req, res) => {
+  getActivities(req, res).catch(error => console.error(error));
 });
 
 // app.get('/deals', (req, res) => {
