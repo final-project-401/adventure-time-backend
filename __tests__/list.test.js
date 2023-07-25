@@ -14,6 +14,15 @@ beforeAll(async () => {
     role: 'Role',
     userId: 1,
   });
+  await req.post('/planner').send({
+    name: 'Test Name',
+    desc: 'Description',
+    date: 12,
+    travelBuddies: 'Travel Buddies',
+    time: 'Time',
+    userId: 1,
+  });
+
 
 });
 
@@ -24,24 +33,16 @@ afterAll(async () => {
 );
 
 describe('Testing server', () => {
-  it('create event', async () => {
-    let res = await req.post('/planner').send({
-      name: 'Test Name',
-      desc: 'Description',
-      date: 'Date',
-      travelBuddies: 'Travel Buddies',
-      time: 'Time',
-      userId: 1,
-    });
 
-    expect(res.status).toBe(201);
-  });
+
   it('should create a new list', async () => {
-    const res = await req.post('/item').send({
+
+    let res = await req.post('/item').send({
       name: 'list1',
       quantity: 1,
       eventId: 1,
     });
+    console.log(res);
     expect(res.status).toBe(201);
     expect(res.body.name).toBe('list1');
     expect(res.body.quantity).toBe(1);
@@ -49,7 +50,7 @@ describe('Testing server', () => {
   );
 
   it('should get all lists', async () => {
-    const res = await req.get('/list');
+    const res = await req.get('/items');
     expect(res.status).toBe(200);
     expect(res.body[0].name).toBe('list1');
     expect(res.body.length).toBe(1);
@@ -57,7 +58,7 @@ describe('Testing server', () => {
   );
 
   it('should get a list by id', async () => {
-    const res = await req.get('/list/1');
+    const res = await req.get('/item/1');
     expect(res.status).toBe(200);
     expect(res.body.name).toBe('list1');
     expect(res.body.quantity).toBe(1);
@@ -65,7 +66,7 @@ describe('Testing server', () => {
   );
 
   it('should update a list', async () => {
-    const res = await req.put('/list/1').send({
+    const res = await req.put('/item/1').send({
       name: 'list2',
       quantity: 1,
       eventId: 1,

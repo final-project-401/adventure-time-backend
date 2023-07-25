@@ -14,9 +14,11 @@ afterAll(async () => {
 
 describe('Testing server', () => {
   it('should get all data', async () => {
-    const response = await req.get('/food');
+    let response = await req.get('/food');
     expect(response.status).toEqual(200);
     expect(typeof response.body).toEqual('object');
+
+
   });
 
 });
