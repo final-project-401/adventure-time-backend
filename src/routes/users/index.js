@@ -11,7 +11,7 @@ const auth0ClientId = 'NQ33EjV3cbB6iTGNoGFNEjbmymEMmXQA';
 const auth0ClientSecret = 'L0PH8PKt6S9b5uTkIM8TfruZGDVhDLP6BJ1IQl_lNGUOwCHrgN8NPpGqJKxgH-bG';
 const auth0Audience = 'https://dev-o6dxx3jjm2fuob3x.us.auth0.com/api/v2/';
 
-const options = {
+const adminOptions = {
   method: 'POST',
   url: 'https://dev-o6dxx3jjm2fuob3x.us.auth0.com/oauth/token',
   headers: { 'content-type': 'application/json' },
@@ -25,9 +25,9 @@ const options = {
 
 
 axios
-  .request(options)
+  .request(adminOptions)
   .then(function (response) {
-    console.log(response.data);
+    console.log('respons data ======>', response.data);
   })
   .catch(function (error) {
     console.error(error);

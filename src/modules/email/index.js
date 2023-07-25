@@ -6,13 +6,20 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 function sendEmail(req, res, next) {
 
+  const { receiver, sender, cc, text } = req.query;
+
   const msg = {
-    to: 'donnaada@icloud.com',
-    from: 'itsjoshcoffey@gmail.com',
+    to: receiver,
+    from: sender,
     subject: 'You have been invited to an event',
-    text: ' ',
-    html: '<link></link>',
+    text,
+    html: text,
   };
+
+  if (cc) {
+    const ccRecipients = cc.split(',').map((email) => email.trim());
+    msg.cc = ccRecipients;
+  }
 
   sgMail
     .send(msg)
