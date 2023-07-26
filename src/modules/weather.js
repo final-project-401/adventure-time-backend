@@ -34,17 +34,13 @@ async function getWeather(req, res, next, postalCode) {
     let key = `postalCode: ${postalCode} - weather`;
 
     if (cache[key] && (Date.now() - cache[key].timestamp) < 8.64e+7) {
-      console.log('Cache was hit!', cache);
       res.status(200).send(cache[key].data);
 
     } else {
-      console.log('Cache was missed!');
       let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&units=I&postal_code=${postalCode}`;
 
       let foundCity = await axios.get(url);
 
-      console.log('postalCode', postalCode, 'searchQuery', searchQuery);
-      // let dataToSend = foundCity.data.data.map(newWeather => new Forecast(newWeather));
       let dataToSend = [{
         city: foundCity.data.city_name,
         state: foundCity.data.state_code,

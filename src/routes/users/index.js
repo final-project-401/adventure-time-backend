@@ -27,7 +27,6 @@ const adminOptions = {
 axios
   .request(adminOptions)
   .then(function (response) {
-    console.log('respons data ======>', response.data);
   })
   .catch(function (error) {
     console.error(error);

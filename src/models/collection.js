@@ -14,7 +14,6 @@ class DataCollection {
   }
 
   create(record) {
-    console.log(record);
     return this.model.create(record);
   }
 

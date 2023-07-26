@@ -24,7 +24,6 @@ function sendEmail(req, res, next) {
   sgMail
     .send(msg)
     .then(() => {
-      console.log('Email sent', msg);
     })
     .catch((error) => {
       console.error(error);

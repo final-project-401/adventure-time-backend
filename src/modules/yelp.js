@@ -42,8 +42,6 @@ async function getReviews(req, res, next) {
     .then(response => {
       let data = response.data.businesses.map(item => new Yelp(item));
       res.status(200).send(data);
-      // console.log(response.data);
-      // console.log(yelpUrl);
     })
     .catch(error => {
       console.log(error);
@@ -66,8 +64,6 @@ async function getActivities(req, res, next) {
     .then(response => {
       let data = response.data.businesses.map(item => new Yelp(item));
       res.status(200).send(data);
-      // res.status(200).send(yelpUrl);      // console.log(response.data);
-      // console.log(yelpUrl);
     })
     .catch(error => {
       console.log(error);
@@ -89,9 +85,6 @@ async function getLodging(req, res, next) {
     .then(response => {
       let data = response.data.businesses.map(item => new Yelp(item));
       res.status(200).send(data);
-      // res.status(200).send(yelpUrl);
-      // console.log(response.data);
-      // console.log(yelpUrl);
     })
     .catch(error => {
       console.log(error);

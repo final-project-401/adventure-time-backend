@@ -11,7 +11,6 @@ router.put('/item/:id', handleUpdate);
 
 async function handleGetAll(req, res) {
   try {
-    console.log('user get works ====');
     let allUsers = await Item.get();
     res.status(200).json(allUsers);
   } catch (error) {

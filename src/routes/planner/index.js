@@ -32,9 +32,7 @@ async function testMiddleware(req, res) {
     axios
       .request(adminOptions)
       .then(function (response) {
-        console.log('respons data ======>', response.data);
         let auth0User = jwtDecode(response.data.access_token);
-        console.log('TOKEN WITH CAPABILITEIS', auth0User);
         // add axios call to perform operation here
       })
       .catch(function (error) {
@@ -45,10 +43,6 @@ async function testMiddleware(req, res) {
   } catch (error) {
     console.error(error);
   }
-  // const obj = req.body;
-  // console.log('REQ', req.user);
-  // await Event.delete(id, obj);
-  // let updatedAdventure = await Event.get();
 }
 
 async function handleGetAll(req, res) {
@@ -70,7 +64,6 @@ async function handleGetOne(req, res) {
 async function handleCreate(req, res) {
   let obj = req.body;
   let newAdventure = await Event.create(obj);
-  console.log(newAdventure);
   res.status(201).json(newAdventure);
 }
 
